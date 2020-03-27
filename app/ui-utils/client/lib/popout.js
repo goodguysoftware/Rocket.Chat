@@ -201,6 +201,17 @@ Template.popout.events({
 		i.isMuted.set(false);
 	},
 	'playerStateChanged .rc-popout'(e, i) {
+		if (e.vimeo === 'playing') {
+			i.isPlaying.set(true);
+			return;
+		}
+		if (e.vimeo === 'pause') {
+			i.isPlaying.set(false);
+			return;
+		}
+		if (!window.YT) {
+			return;
+		}
 		if (e.detail === window.YT.PlayerState.PLAYING) {
 			i.isPlaying.set(true);
 		} else if (e.detail === window.YT.PlayerState.PAUSED) {
